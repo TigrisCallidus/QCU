@@ -59,4 +59,4 @@ sysinfo.txt
 crashlytics-build.properties
 
 #Content of the python environment.
-*.q1/
+*.q/
