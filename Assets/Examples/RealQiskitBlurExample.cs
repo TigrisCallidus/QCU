@@ -40,12 +40,15 @@ public class RealQiskitBlurExample : MonoBehaviour {
     //Linking
     [HideInInspector]
     public RawImage TargetImage;
+    [HideInInspector]
+    public GameObject LoadingIndicator;
 
 
     SimulateJob myJob;
 
     //Gets called when you press run
     void Start() {
+        TargetImage.texture = Input;
         prepareAndStartJob();
     }
 
@@ -62,6 +65,10 @@ public class RealQiskitBlurExample : MonoBehaviour {
 
     //Doing the work. Creates a new job and runs it.
     void prepareAndStartJob() {
+
+        //Showing Loading Indicator
+        LoadingIndicator.SetActive(true);
+
         //First create a new simulatejob to run this on a seperate thread
         myJob = new SimulateJob();
         //Now set the "simulator" to the QiskitSimulator. (If UseReal is set to true, a real backend is used, and your Token needs to be provided).
@@ -81,6 +88,10 @@ public class RealQiskitBlurExample : MonoBehaviour {
         Output = QuantumImageCreator.GetGreyTextureDirect(myJob.Probabilities, Input.width, Input.height,myJob.Circuit.OriginalSum);
         //Setting the new texture to the image on screen
         TargetImage.texture = Output;
+
+        //Hiding Loading Indicator
+        LoadingIndicator.SetActive(false);
+
     }
 
     //A simple quantumBlur is applied to the circuit

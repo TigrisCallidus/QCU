@@ -282,6 +282,7 @@ namespace Qiskit {
                 builder.Append(")\n");
             }
 
+            //Should only be used when the amplitudes were set, since this will be quite slow on a real quantum computer
             if (Amplitudes != null && Amplitudes.Length > 0 && OriginalSum > 0) {
 
                 //hack only possible because the Amplitudes.ToString() only gives the Real values.

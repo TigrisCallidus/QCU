@@ -274,6 +274,7 @@ namespace Qiskit.Float {
         }
 
         public string GetQiskitString(bool includeAllMeasures = false) {
+            //TODO use correct method (from QuantumCircuit)
             string translation = "";
 
             if (NumberOfOutputs == 0) {

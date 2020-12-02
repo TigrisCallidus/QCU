@@ -32,6 +32,13 @@ namespace Qiskit {
         string token;
         string backend;
 
+        /// <summary>
+        /// Initialises a new simulator
+        /// </summary>
+        /// <param name="numberOfShots">How many time the circuit is run</param>
+        /// <param name="useRealMachine">If a real backend is used (instead of the qiskit simulator)</param>
+        /// <param name="authToken">The authentification token needed for the backend</param>
+        /// <param name="chosenBackend">The backend you want to use. Specify if you want something else than melbourne.</param>
         public QiskitSimulator(int numberOfShots=1000, bool useRealMachine = false, string authToken="", string chosenBackend= "ibmq_16_melbourne") {
             numberOfSimulations = numberOfShots;
             useSimulator = !useRealMachine;
