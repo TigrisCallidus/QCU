@@ -1,8 +1,11 @@
 # QCU
 Quantum Computing Unity allows to make a call to a areal quantum computer from within unity
 
+This project is meant to be used together with Unity3d (https://unity3d.com)
 
 ## Setup
+
+Download a local copy of this project to a folder which is in a not too long filepath. (Else it could cause problems with builds).
 
 In order to run QCU you need to first setup a python environment with qiskit installed.
 One way to do this is, is by using anaconda with the following commands
@@ -52,3 +55,13 @@ As you can see in the example there are these steps which needs to be done:
 5. Start the SimulateJob
 6. Wait for the SimulateJob to finish (in an Update)
 7. When the Job is finished get the calculated probabilities from your job to further useage.
+
+
+## Making Builds
+
+You can only make builds for the platform you are currently using, since the Python Environment is platform specific.
+
+Further make sure the file path to the folder where you have the local copy of this repository is not too long, else build errors could come up.
+(This happened on our testing on windows machines, and this is the reason why the project name and the folder for the python environment is now so short).
+
+Except from the above mentioned details building works the same as it always does with unity: https://docs.unity3d.com/Manual/PublishingBuilds.html
