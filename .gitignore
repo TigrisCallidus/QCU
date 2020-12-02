@@ -62,3 +62,4 @@ crashlytics-build.properties
 #*.q/
 *.q1/
 
+/Assets/StreamingAssets/.q
