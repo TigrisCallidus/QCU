@@ -28,6 +28,8 @@ After you have created this environment, you can find it in your anaconda instal
 
 In that folder there will be a folder "env" and inside there will be a folder "qiskitEnvironment" (if you named it like this).
 Copy all the content of the folder "qiskitEnvironment" into your local copy of QCU into the folder Assets/StreamingAssets/.q 
+You need to do the copying in your file browser, not in Unity, since folders starting with a dot are hidden in Unity (and not processed).
+You may need to change the setting to show hidden folders/files to be able to see the .q folder.
 (The folder will be empty except a PASTE_YOUR_FILES_HERE.txt)
 
 ## Using QCU
