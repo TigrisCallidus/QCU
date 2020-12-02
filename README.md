@@ -1,5 +1,5 @@
 # QCU
-Quantum Computing Unity allows to make a call to a areal quantum computer from within unity
+Quantum Computing Unity allows to make a call to a real quantum computer from within unity
 
 This project is meant to be used together with Unity3d (https://unity3d.com)
 
