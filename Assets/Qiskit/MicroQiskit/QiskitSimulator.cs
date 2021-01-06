@@ -107,6 +107,7 @@ namespace Qiskit {
             process.WaitForExit();
             UnityEngine.Debug.Log(process.ExitCode);
             process.Close();
+            //Debug.Log(output);
             return output;
             //ReadProbabilities(ref probabilities, output);
         }
@@ -115,7 +116,19 @@ namespace Qiskit {
         public void ReadProbabilities(ref double[] probabilities, string qiskitString) {
             int probabilityLength = probabilities.Length;
             //-4 because of the newline at the end (/r/n) counting as 2 elements
+
+#if UNITY_STANDALONE_WIN
             string[] outputPairs = qiskitString.Substring(1, qiskitString.Length - 4).Split(new string[] { ", " }, StringSplitOptions.None);
+
+#elif UNITY_STANDALONE_OSX
+            string[] outputPairs = qiskitString.Substring(1, qiskitString.Length - 3).Split(new string[] { ", " }, StringSplitOptions.None);
+
+#else
+        string[] outputPairs = qiskitString.Substring(1, qiskitString.Length - 3).Split(new string[] { ", " }, StringSplitOptions.None);
+        //notimplemented yet but should also work for linux
+
+#endif
+
             int pairLength = outputPairs.Length;
             double totalCount = 0;
             for (int i = 0; i < pairLength; i++) {
@@ -150,7 +163,17 @@ namespace Qiskit {
 
         const string pythonScripts = @"/PythonScripts/";
         const string exchange = @"Exchange/";
+#if UNITY_STANDALONE_WIN
         const string pythonEXE = @"/.q/python.exe";
+
+#elif UNITY_STANDALONE_OSX
+        const string pythonEXE = @"/.q/bin/python";
+
+#else
+        //const string pythonEXE = @"/.q/python.exe";
+        //notimplemented yet
+
+#endif
 
 
         const string pythonStartSimulator =
@@ -188,7 +211,7 @@ result = job.result()
 counts = result.get_counts(qc)
 print(counts)";
 
-        #endregion
+#endregion
 
     }
 }
