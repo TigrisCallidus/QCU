@@ -1,9 +1,13 @@
 # QCU
-Quantum Computing Unity allows to make a call to a areal quantum computer from within unity
+Quantum Computing Unity allows to make a call to a real quantum computer from within unity
 
 This project is meant to be used together with Unity3d (https://unity3d.com)
 
+CURRENTLY ONLY WORKING ON WINDOWS
+
 ## Setup
+
+WINDOWS SETTUP (MacOS to follow)
 
 Download a local copy of this project to a folder which is in a not too long filepath. (Else it could cause problems with builds).
 
@@ -24,6 +28,8 @@ After you have created this environment, you can find it in your anaconda instal
 
 In that folder there will be a folder "env" and inside there will be a folder "qiskitEnvironment" (if you named it like this).
 Copy all the content of the folder "qiskitEnvironment" into your local copy of QCU into the folder Assets/StreamingAssets/.q 
+You need to do the copying in your file browser, not in Unity, since folders starting with a dot are hidden in Unity (and not processed).
+You may need to change the setting to show hidden folders/files to be able to see the .q folder.
 (The folder will be empty except a PASTE_YOUR_FILES_HERE.txt)
 
 ## Using QCU
