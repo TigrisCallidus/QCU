@@ -3,11 +3,9 @@ Quantum Computing Unity allows to make a call to a real quantum computer from wi
 
 This project is meant to be used together with Unity3d (https://unity3d.com)
 
-CURRENTLY ONLY WORKING ON WINDOWS
-
 ## Setup
 
-WINDOWS and MACOS SETTUP
+WINDOWS and MACOS SETUP
 
 Download a local copy of this project to a folder which is in a not too long filepath. (Else it could cause problems with builds).
 
