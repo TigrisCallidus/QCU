@@ -64,8 +64,12 @@ public class PythonJob : ThreadedJob {
         //UnityEngine.Debug.Log(output);
 
         process.WaitForExit();
-        UnityEngine.Debug.Log(process.ExitCode);
-        UnityEngine.Debug.Log(process.StandardError.ReadToEnd());
+        //UnityEngine.Debug.Log(process.ExitCode);
+        if (process.ExitCode>0) {
+            UnityEngine.Debug.LogError(process.StandardError.ReadToEnd());
+        } else {
+            UnityEngine.Debug.Log("Run without error");
+        }
 
         process.Close();
         //Debug.Log(output);

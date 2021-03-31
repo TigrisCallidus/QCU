@@ -98,6 +98,7 @@ public class PythonScriptTest : MonoBehaviour {
 
         process.StartInfo.UseShellExecute = false;
         process.StartInfo.RedirectStandardOutput = true;
+        process.StartInfo.RedirectStandardError = true;
 
         process.Start();
 
@@ -107,7 +108,12 @@ public class PythonScriptTest : MonoBehaviour {
         Debug.Log(output);
 
         process.WaitForExit();
-        Debug.Log(process.ExitCode);
+        //Debug.Log(process.ExitCode);
+        if (process.ExitCode>0) {
+            Debug.LogError(process.StandardError.ReadToEnd());
+        } else {
+            Debug.Log("Run without error");
+        }
         process.Close();
         return output;
     }
