@@ -26,7 +26,7 @@ public class RealQiskitBlurExample : MonoBehaviour {
     public Texture2D Output;
     [Tooltip("The rotation which is applied by the quantumblur to the texture")]
 
-    public float Rotation = 0.25f;
+    public float QuantumBlurRotation = 0.25f;
 
     [Tooltip("How many shots are used (how often the circuit is run and measured) for simulator and the backend")]
     public int NumberOfShots = 1000;
@@ -34,8 +34,17 @@ public class RealQiskitBlurExample : MonoBehaviour {
     [Tooltip("Your token to access the IBM backend.")]
     public string Token = "";
 
-    [Tooltip("IF a real device is used or not")]
+    [Tooltip("If a real device is used or not")]
     public bool UseReal = false;
+
+    [Tooltip("The name of the device you wish to run on (melbourne will be taken if left empty)")]
+    public string DeviceName = "ibmq_16_melbourne";
+
+    [Tooltip("If the python file should only be written and not run")]
+    public bool DontStartPython = false;
+
+    [Tooltip("Set to true if you want to use an internal device (for IBM employes only)")]
+    public bool UseInternalDevice = false;
 
     //Linking
     [HideInInspector]
@@ -66,17 +75,21 @@ public class RealQiskitBlurExample : MonoBehaviour {
     //Doing the work. Creates a new job and runs it.
     void prepareAndStartJob() {
 
+        if (DeviceName.Length<5) {
+            DeviceName = "ibmq_16_melbourne";
+        }
+
         //Showing Loading Indicator
         LoadingIndicator.SetActive(true);
 
         //First create a new simulatejob to run this on a seperate thread
         myJob = new SimulateJob();
         //Now set the "simulator" to the QiskitSimulator. (If UseReal is set to true, a real backend is used, and your Token needs to be provided).
-        myJob.Simulator = new QiskitSimulator(1000, UseReal, Token);
+        myJob.Simulator = new QiskitSimulator(NumberOfShots, UseReal, Token, DeviceName, DontStartPython, UseInternalDevice);
         //Creating a circuit from the red channel of the provided texture (for black and white image any of the 3 color channels is ok).
         myJob.Circuit=QuantumImageCreator.GetCircuitDirect(Input, ColorChannel.R);
         //applying additional manipulation to the circuit
-        applyPartialQ(myJob.Circuit, Rotation);
+        applyPartialQ(myJob.Circuit, QuantumBlurRotation);
         //run the job, meaning start the simulation (or the call to the backend)
         myJob.Start();
     }
@@ -85,6 +98,11 @@ public class RealQiskitBlurExample : MonoBehaviour {
     void finishJob() {
         Debug.Log("Job finished");
         //Creating a texture with the calculated probabilities
+
+        if (DontStartPython) {
+            return;
+        }
+
         Output = QuantumImageCreator.GetGreyTextureDirect(myJob.Probabilities, Input.width, Input.height,myJob.Circuit.OriginalSum);
         //Setting the new texture to the image on screen
         TargetImage.texture = Output;

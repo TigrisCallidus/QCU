@@ -329,8 +329,8 @@ namespace Qiskit {
                         //translation += "qc.h(" + gate.First + ")\n";
                         builder.Append("qc.h(");
                         builder.Append(gate.First);
-                        builder.Append(", ");
-                        builder.Append(gate.Second);
+                        //builder.Append(", ");
+                        //builder.Append(gate.Second);
                         builder.Append(")\n");
                         break;
                     case CircuitType.CX:
