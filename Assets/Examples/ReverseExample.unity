@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bc1a6c000ce5ba4ab1d3e15ce9658c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnlySingleOutput: 0
+  UseSingleFile: 0
   SingleFile: {fileID: 4900000, guid: 3c6fcefc17bb9c24598205885244c6d3, type: 3}
   MultipleFiles:
   - {fileID: 4900000, guid: 3c6fcefc17bb9c24598205885244c6d3, type: 3}
@@ -160,7 +160,7 @@ MonoBehaviour:
   Dimension: 32
   TargetImage: {fileID: 1090753816}
   Normalization: 10
-  RecalculateNormalization: 0
+  RecalculateNormalization: 1
 --- !u!4 &283337740
 Transform:
   m_ObjectHideFlags: 0

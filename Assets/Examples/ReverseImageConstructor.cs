@@ -21,7 +21,7 @@ using UnityEngine.UI;
 
 public class ReverseImageConstructor : MonoBehaviour {
 
-    public bool OnlySingleOutput = false;
+    public bool UseSingleFile = false;
 
     public TextAsset SingleFile;
 
@@ -39,7 +39,7 @@ public class ReverseImageConstructor : MonoBehaviour {
 
 
     void Start() {
-        if (OnlySingleOutput) {
+        if (UseSingleFile) {
             ConstructOutput();
         } else {
             ConstructOutputCombined();
