@@ -5,7 +5,7 @@ This project is meant to be used together with Unity3d (https://unity3d.com)
 
 ## Setup
 
-WINDOWS and MACOS SETUP
+WINDOWS and MACOS SETUP and LINUX SETUP
 
 Download a local copy of this project to a folder which is in a not too long filepath. (Else it could cause problems with builds).
 
@@ -24,9 +24,13 @@ For more info: https://qiskit.org/documentation/install.html
 After you have created this environment, you can find it in your anaconda installation: https://docs.anaconda.com/anaconda/user-guide/faq/
 
 In that folder there will be a folder "env" and inside there will be a folder "qiskitEnvironment" (if you named it like this).
+
 Copy all the content of the folder "qiskitEnvironment" into your local copy of QCU into the folder Assets/StreamingAssets/.q 
+
 You need to do the copying in your file browser, not in Unity, since folders starting with a dot are hidden in Unity (and not processed).
-You may need to change the setting to show hidden folders/files to be able to see the .q folder.
+
+You may need to change the setting to show hidden folders/files to be able to see the .q folder. (Default on MacOSX does not show hidden folders)
+
 (The folder will be empty except a PASTE_YOUR_FILES_HERE.txt)
 
 ## Using QCU
