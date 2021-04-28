@@ -137,13 +137,14 @@ namespace Qiskit {
         public void ReadProbabilities(ref double[] probabilities, string qiskitString, double normalization=0, bool calculateNormalization=false) {
             int probabilityLength = probabilities.Length;
 
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
             //-4 because of the newline at the end (/r/n) counting as 2 elements
             string[] outputPairs = qiskitString.Substring(1, qiskitString.Length - 4).Split(new string[] { ", " }, StringSplitOptions.None);
 
-#elif UNITY_STANDALONE_OSX
+#elif UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
             string[] outputPairs = qiskitString.Substring(1, qiskitString.Length - 3).Split(new string[] { ", " }, StringSplitOptions.None);
-
+#elif UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+            string[] outputPairs = qiskitString.Substring(1, qiskitString.Length - 3).Split(new string[] { ", " }, StringSplitOptions.None);
 #else
         string[] outputPairs = qiskitString.Substring(1, qiskitString.Length - 3).Split(new string[] { ", " }, StringSplitOptions.None);
         //notimplemented yet but should also work for linux
@@ -192,7 +193,6 @@ namespace Qiskit {
 
         public void ReadProbabilities(ref double[] probabilities, string[] qiskitStrings, double normalization = 0, bool calculateSortedValues = false) {
             int probabilityLength = probabilities.Length;
-            //-4 because of the newline at the end (/r/n) counting as 2 elements
 
             double totalCount = 0;
 
@@ -202,12 +202,13 @@ namespace Qiskit {
 
                 string qiskitString = qiskitStrings[j];
 
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+                //-4 because of the newline at the end (/r/n) counting as 2 elements
                 string[] outputPairs = qiskitString.Substring(1, qiskitString.Length - 4).Split(new string[] { ", " }, StringSplitOptions.None);
-
-#elif UNITY_STANDALONE_OSX
+#elif UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
             string[] outputPairs = qiskitString.Substring(1, qiskitString.Length - 3).Split(new string[] { ", " }, StringSplitOptions.None);
-
+#elif UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+            string[] outputPairs = qiskitString.Substring(1, qiskitString.Length - 3).Split(new string[] { ", " }, StringSplitOptions.None);
 #else
         string[] outputPairs = qiskitString.Substring(1, qiskitString.Length - 3).Split(new string[] { ", " }, StringSplitOptions.None);
         //notimplemented yet but should also work for linux
@@ -285,8 +286,6 @@ namespace Qiskit {
             Debug.Log("Finished with probabilities");
         }
 
-
-
         #region Constant strings
 
         const string pythonFileName = "pythonfile.py";
@@ -295,10 +294,13 @@ namespace Qiskit {
 
         const string pythonScripts = @"/PythonScripts/";
         const string exchange = @"Exchange/";
-#if UNITY_STANDALONE_WIN
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
         const string pythonEXE = @"/.q/python.exe";
 
-#elif UNITY_STANDALONE_OSX
+#elif UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
+        const string pythonEXE = @"/.q/bin/python";
+
+#elif UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
         const string pythonEXE = @"/.q/bin/python";
 
 #else

@@ -19,12 +19,27 @@ using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 public class PythonScriptTest : MonoBehaviour {
+
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
     const string pythonEXE = @"/.q/python.exe";
+
+#elif UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
+        const string pythonEXE = @"/.q/bin/python";
+
+#elif UNITY_STANDALONE_LINUX || UNITY_EDITOR_LINUX
+        const string pythonEXE = @"/.q/bin/python";
+
+#else
+        //const string pythonEXE = @"/.q/python.exe";
+        //notimplemented yet
+
+#endif
     const string exchange = @"Exchange/";
-    const string pythonFileName = "testfile.py";
     const string pythonScripts = @"/PythonScripts/";
+    //const string pythonFileName = "testfile.py";
 
     public bool RunThreaded;
+    public string pythonFileName = "testfile.py";
 
 
     PythonJob myJob;
@@ -55,7 +70,7 @@ public class PythonScriptTest : MonoBehaviour {
 
     //gets called when the job is finished
     void finishJob() {
-        Debug.Log("Job finished with output" + myJob.Output);
+        Debug.Log("Job finished with output: " + myJob.Output);
     }
 
     //gets called each frame while the job is running. This normally is not needed but you coud do things here.
@@ -64,7 +79,7 @@ public class PythonScriptTest : MonoBehaviour {
     }
 
     void finishedJobCallback(string output) {
-        Debug.Log("Finished Job Callbacl was called with output:" + output);
+        Debug.Log("Finished Job Callback was called with output:" + output);
     }
 
     //Doing the work. Creates a new job and runs it.
@@ -76,6 +91,7 @@ public class PythonScriptTest : MonoBehaviour {
         myJob = new PythonJob();
         myJob.PythonPath = pythonPath;
         myJob.FilePath = filePath;
+        myJob.FinishedCallback += finishedJobCallback;
 
         myJob.Start();
     }
